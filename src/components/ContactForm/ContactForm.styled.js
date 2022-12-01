@@ -26,4 +26,10 @@ margin-left: 5px;
 background-color: white;
 border-radius: 5px;
 border: 1px solid rgb(128, 128, 128, 0.5);
+cursor: pointer;
+:hover,
+:focus {
+  background-color: blue;
+  color: white;
+}
 `
