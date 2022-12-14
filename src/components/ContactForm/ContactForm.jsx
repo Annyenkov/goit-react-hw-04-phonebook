@@ -30,6 +30,7 @@ const ContactForm = ({onSubmit}) => {
 
   const handleSubmit = e => {
     e.preventDefault();
+    onSubmit(nanoid(4), name, number)
     reset();
   }
 
