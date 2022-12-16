@@ -7,16 +7,11 @@ import { useEffect } from "react";
 import { initialContacts } from "data/initialContacts";
 
 const App = () => {
-  const [contacts, setContacts] = useState(initialContacts);
+  const [contacts, setContacts] = useState(
+    () => JSON.parse(window.localStorage.getItem('contacts')) ?? initialContacts
+  );
   const [filter, setFilter] = useState('');
 
-  useEffect(() => {
-    const saveContacts = JSON.parse(localStorage.getItem('contacts'))
-    if (!saveContacts) {
-      return
-    }
-    setContacts(saveContacts)
-  },[])
   useEffect(() => {
     if (contacts === initialContacts) {
       return
