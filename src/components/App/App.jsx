@@ -1,13 +1,28 @@
 import { useState } from "react";
-import { initialContacts } from "data/initialContacts";
 import Filter from "components/Filter";
 import ContactList from "components/ContactList";
 import ContactForm from "components/ContactForm";
 import { Div } from "./App.styled";
+import { useEffect } from "react";
+import { initialContacts } from "data/initialContacts";
 
 const App = () => {
   const [contacts, setContacts] = useState(initialContacts);
   const [filter, setFilter] = useState('');
+
+  useEffect(() => {
+    const saveContacts = JSON.parse(localStorage.getItem('contacts'))
+    if (!saveContacts) {
+      return
+    }
+    setContacts(saveContacts)
+  },[])
+  useEffect(() => {
+    if (contacts === initialContacts) {
+      return
+    }
+    localStorage.setItem('contacts', JSON.stringify(contacts))
+  },[contacts])
 
   const addContact = (id, name, number) => {
     if (contacts.find(contact => contact.name === name)) {
